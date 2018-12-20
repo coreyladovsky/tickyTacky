@@ -4,6 +4,8 @@ class HumanPlayer {
     this.sym = sym
   }
   getMove() {
-    
+
   }
 }
+
+export default HumanPlayer;

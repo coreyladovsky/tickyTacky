@@ -1,4 +1,4 @@
-const board = require("./board");
+const Board = require("./board");
 
 class Game {
   constructor(player1, player2) {
@@ -7,6 +7,7 @@ class Game {
     this.currentPlayer = player1;
     this.board = new Board();
   }
+
 
   switchPlayers() {
     this.currentPlayer =
@@ -31,3 +32,5 @@ class Game {
     }
   }
 }
+
+module.exports = Game;
