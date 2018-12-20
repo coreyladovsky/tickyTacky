@@ -3,6 +3,7 @@ class Board extends Array {
     super();
     this.board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
     this.movesRemaining = 9;
+    this.winner = null;
     this.MOVES_LEGEND = {
       1: [0, 0],
       2: [0, 1],
@@ -26,8 +27,23 @@ class Board extends Array {
   }
 
   placeMark(moveNumber, sym) {
+    this.movesRemaining--;
     this.board[this.MOVES_LEGEND[moveNumber][0]][this.MOVES_LEGEND[moveNumber][1]] = sym;
   }
+
+  isGameOver() {
+    return !this.winner && this.movesRemaining > 0 ? false : true;
+  }
+
+  findWinner(){
+
+  }
+
+  isHorizontal() {
+    
+  }
+
+
 
 
 
