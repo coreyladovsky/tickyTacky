@@ -18,30 +18,37 @@ class Board extends Array {
   }
 
   isValidMove(moveNumber) {
-    if(moveNumber < 1 || moveNumber > 9) return false;
+    if (moveNumber < 1 || moveNumber > 9) return false;
     return !Number(this.key(moveNumber)) ? false : true;
   }
 
   key(moveNumber) {
-    return this.board[this.MOVES_LEGEND[moveNumber][0]][this.MOVES_LEGEND[moveNumber][1]];
+    return this.board[this.MOVES_LEGEND[moveNumber][0]][
+      this.MOVES_LEGEND[moveNumber][1]
+    ];
   }
 
   placeMark(moveNumber, sym) {
     this.movesRemaining--;
-    this.board[this.MOVES_LEGEND[moveNumber][0]][this.MOVES_LEGEND[moveNumber][1]] = sym;
+    this.board[this.MOVES_LEGEND[moveNumber][0]][
+      this.MOVES_LEGEND[moveNumber][1]
+    ] = sym;
   }
 
   isGameOver() {
     return !this.winner && this.movesRemaining > 0 ? false : true;
   }
 
-  findWinner(){
-
+  findWinner() {
+    this.isHorizontal();
+    this.isVertical();
+    this.isDiagnol();
+    return this.winner;
   }
 
   isHorizontal(board = this.board.length) {
     for (let i = 0; i < board.length; i++) {
-      if(board[i].every(el=> el === board[i][0]) ){
+      if (board[i].every(el => el === board[i][0])) {
         this.winner = board[i][0];
         return true;
       }
@@ -51,49 +58,37 @@ class Board extends Array {
 
   transpose() {
     let output = [];
-    for(let row = 0; row < this.board.length; row++) {
+    for (let row = 0; row < this.board.length; row++) {
       output[row] = [];
-      for(let col = 0; col < this.board.length; col++) {
+      for (let col = 0; col < this.board.length; col++) {
         output[row][col] = this.board[col][row];
       }
     }
-    return output
+    return output;
   }
 
-  isVertical(){
+  isVertical() {
     let mtx = this.transpose();
-    return this.isHorizontal(mtx)
+    return this.isHorizontal(mtx);
   }
 
-  isDiagnol(){
+  isDiagnol() {
     let leftDiag = [];
     let rightDiag = [];
-    for(let i = 0; i < this.board.length; i++) {
-      leftDiag.push(this.board[i][i])
-      rightDiag.push(this.board[i][this.board.length - i - 1])
+    for (let i = 0; i < this.board.length; i++) {
+      leftDiag.push(this.board[i][i]);
+      rightDiag.push(this.board[i][this.board.length - i - 1]);
     }
     if (leftDiag.every(el => el === leftDiag[0])) {
-      this.winner = leftDiag[0]
+      this.winner = leftDiag[0];
       return true;
     }
     if (rightDiag.every(el => el === rightDiag[0])) {
-      this.winner = rightDiag[0]
+      this.winner = rightDiag[0];
       return true;
     }
     return false;
   }
-
-
-
-
-
 }
-//
-let board = new Board()
-// console.log(board.isValidMove(10));
-// console.log(board.isValidMove(3));
-// console.log(board.key(3));
-// board.placeMark(3, "X")
-// console.log(board.isValidMove(3));
-// console.log(board.key(3));
-console.log(board.isDiagnol());
+
+module.exports = Board;
