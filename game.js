@@ -32,7 +32,10 @@ class Game {
   }
 
   revealWinner() {
-    return this.board.winner;
+    if(this.board.winner.toLowerCase() === "tie") {
+      return this.board.winner;
+    }
+    return this.board.winner === this.player1.sym ? this.player1.name : this.player2.name;
   }
 
 }

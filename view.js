@@ -23,7 +23,7 @@ class View {
       html += "<ul>"
         row.forEach(el => {
           if(Number(el)) {
-            html += `<li class='grey' value=${value}> </li>`
+            html += `<li class='grey' value=${value}></li>`
           } else {
             html += "<li>" + el + "</li>"
           }
