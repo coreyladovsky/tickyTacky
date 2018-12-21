@@ -4,6 +4,12 @@ class View {
     this.play = play;
     this.game = game;
     this.viewBoard()
+    play.addEventListener("click", this.handleClick.bind(this))
+  }
+
+  handleClick(e) {
+    this.game.recieveMove(Number(e.target.value))
+    this.viewBoard();
   }
 
   viewBoard() {

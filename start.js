@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    e.currentTarget.remove()
     let player1 = new HumanPlayer(state.player1, "X")
     let player2 = new HumanPlayer(state.player2, "O")
     let game = new Game(player1, player2);

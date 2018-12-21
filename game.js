@@ -14,23 +14,21 @@ class Game {
       this.currentPlayer === this.player1 ? this.player2 : this.player1;
   }
 
-  takeTurn(player) {
+  recieveMove(move) {
     let moveMade = false;
-    while(!moveMade) {
-      let move = player.getMove();
-      if(this.board.isValidMove(move)) {
-        this.board.placeMark(move, player.sym)
-        moveMade = true;
-      }
+    if(this.board.isValidMove(move)) {
+      this.board.placeMark(move, this.currentPlayer.sym);
+      this.switchPlayers();
+      // moveMade = true;
     }
   }
 
-  play() {
-    while(!this.board.isGameOver()) {
-      this.takeTurn(this.currentPlayer);
-      this.switchPlayers();
-    }
-  }
+  // play() {
+  //   while(!this.board.isGameOver()) {
+  //     this.takeTurn(this.currentPlayer);
+  //     this.switchPlayers();
+  //   }
+  // }
 }
 
 module.exports = Game;
