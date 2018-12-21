@@ -1,6 +1,6 @@
-import Game from "./game";
-import View from "./view";
-import HumanPlayer from "./HumanPlayer";
+import Game from "./gameClasses/game";
+import View from "./gameClasses/view";
+import HumanPlayer from "./gameClasses/humanPlayer";
 
 document.addEventListener("DOMContentLoaded", () => {
   let state = { player1: "", player2: "" };

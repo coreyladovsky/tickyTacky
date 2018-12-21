@@ -86,31 +86,10 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./HumanPlayer.js":
-/*!************************!*\
-  !*** ./HumanPlayer.js ***!
-  \************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-class HumanPlayer {
-  constructor(name, sym) {
-    this.name = name;
-    this.sym = sym
-  }
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (HumanPlayer);
-
-
-/***/ }),
-
-/***/ "./board.js":
-/*!******************!*\
-  !*** ./board.js ***!
-  \******************/
+/***/ "./gameClasses/board.js":
+/*!******************************!*\
+  !*** ./gameClasses/board.js ***!
+  \******************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -216,16 +195,16 @@ class Board extends Array {
 
 /***/ }),
 
-/***/ "./game.js":
-/*!*****************!*\
-  !*** ./game.js ***!
-  \*****************/
+/***/ "./gameClasses/game.js":
+/*!*****************************!*\
+  !*** ./gameClasses/game.js ***!
+  \*****************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _board_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./board.js */ "./board.js");
+/* harmony import */ var _board_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./board.js */ "./gameClasses/board.js");
 
 class Game {
   constructor(player1, player2) {
@@ -236,7 +215,7 @@ class Game {
   }
 
   restart() {
-    this.board = new _board_js__WEBPACK_IMPORTED_MODULE_0__["default"]()
+    this.board = new _board_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
   }
 
   switchPlayers() {
@@ -245,7 +224,7 @@ class Game {
   }
 
   recieveMove(move) {
-    if(!this.isGameOver()) {
+    if (!this.isGameOver()) {
       let moveMade = false;
       if (this.board.isValidMove(move)) {
         this.board.placeMark(move, this.currentPlayer.sym);
@@ -255,23 +234,119 @@ class Game {
   }
 
   isGameOver() {
-    return this.board.isGameOver()
+    return this.board.isGameOver();
   }
 
   revealWinner() {
-    if(this.board.winner.toLowerCase() === "tie") {
+    if (this.board.winner.toLowerCase() === "tie") {
       return this.board.winner;
     }
-    return this.board.winner === this.player1.sym ? this.player1.name : this.player2.name;
+    return this.board.winner === this.player1.sym
+      ? this.player1.name
+      : this.player2.name;
   }
 
   revealBoard() {
     return this.board.board;
   }
-
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Game);
+
+
+/***/ }),
+
+/***/ "./gameClasses/humanPlayer.js":
+/*!************************************!*\
+  !*** ./gameClasses/humanPlayer.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+class HumanPlayer {
+  constructor(name, sym) {
+    this.name = name.toUpperCase();
+    this.sym = sym;
+  }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (HumanPlayer);
+
+
+/***/ }),
+
+/***/ "./gameClasses/view.js":
+/*!*****************************!*\
+  !*** ./gameClasses/view.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+class View {
+  constructor(game, play) {
+    this.play = play;
+    this.game = game;
+    this.button = document.querySelector(".playAgain");
+    this.gameOver = document.querySelector(".gameOver");
+    play.addEventListener("click", this.handleClick.bind(this));
+    this.button.addEventListener("click", this.newGame.bind(this));
+    this.render();
+  }
+
+  handleClick(e) {
+    this.game.recieveMove(Number(e.target.value));
+    this.render();
+  }
+
+  viewBoard() {
+    let html = "";
+    let value = 1;
+    this.game.revealBoard().forEach(row => {
+      html += "<ul>";
+      row.forEach(el => {
+        if (Number(el)) {
+          html += `<li class='grey' value=${value}></li>`;
+        } else {
+          html += "<li>" + el + "</li>";
+        }
+        value++;
+      });
+      html += "</ul>";
+    });
+    this.play.innerHTML = html;
+  }
+
+  newGame() {
+    this.button.classList.remove("show");
+    this.button.classList.add("hide");
+    this.gameOver.innerText = "";
+    this.game.restart();
+    this.render();
+  }
+
+  gameOverSequence() {
+    this.gameOver.innerText = `Game Over! Winner is: ${this.game.revealWinner()}`;
+    this.button.classList.remove("hide");
+    this.button.classList.add("show");
+  }
+
+  isGameOver() {
+    return this.game.isGameOver();
+  }
+
+  render() {
+    this.viewBoard();
+    if (this.isGameOver()) {
+      this.gameOverSequence();
+    }
+  }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (View);
 
 
 /***/ }),
@@ -285,9 +360,9 @@ class Game {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _game__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./game */ "./game.js");
-/* harmony import */ var _view__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./view */ "./view.js");
-/* harmony import */ var _HumanPlayer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./HumanPlayer */ "./HumanPlayer.js");
+/* harmony import */ var _gameClasses_game__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gameClasses/game */ "./gameClasses/game.js");
+/* harmony import */ var _gameClasses_view__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gameClasses/view */ "./gameClasses/view.js");
+/* harmony import */ var _gameClasses_humanPlayer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./gameClasses/humanPlayer */ "./gameClasses/humanPlayer.js");
 
 
 
@@ -307,87 +382,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function startGame() {
-    let player1 = new _HumanPlayer__WEBPACK_IMPORTED_MODULE_2__["default"](state.player1, "X");
-    let player2 = new _HumanPlayer__WEBPACK_IMPORTED_MODULE_2__["default"](state.player2, "O");
-    let game = new _game__WEBPACK_IMPORTED_MODULE_0__["default"](player1, player2);
-    new _view__WEBPACK_IMPORTED_MODULE_1__["default"](game, play);
+    let player1 = new _gameClasses_humanPlayer__WEBPACK_IMPORTED_MODULE_2__["default"](state.player1, "X");
+    let player2 = new _gameClasses_humanPlayer__WEBPACK_IMPORTED_MODULE_2__["default"](state.player2, "O");
+    let game = new _gameClasses_game__WEBPACK_IMPORTED_MODULE_0__["default"](player1, player2);
+    new _gameClasses_view__WEBPACK_IMPORTED_MODULE_1__["default"](game, play);
   }
 });
-
-
-/***/ }),
-
-/***/ "./view.js":
-/*!*****************!*\
-  !*** ./view.js ***!
-  \*****************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-
-class View {
-  constructor(game, play) {
-    this.play = play;
-    this.game = game;
-    this.button = document.querySelector(".playAgain");
-    this.gameOver = document.querySelector(".gameOver");
-    play.addEventListener("click", this.handleClick.bind(this))
-    this.button.addEventListener("click", this.newGame.bind(this))
-    this.render()
-  }
-
-  handleClick(e) {
-    this.game.recieveMove(Number(e.target.value))
-    this.render();
-  }
-
-  viewBoard() {
-    let html = ""
-    let value = 1;
-    this.game.revealBoard().forEach(row => {
-      html += "<ul>"
-        row.forEach(el => {
-          if(Number(el)) {
-            html += `<li class='grey' value=${value}></li>`
-          } else {
-            html += "<li>" + el + "</li>"
-          }
-          value++
-        })
-        html += "</ul>"
-    })
-    this.play.innerHTML = html
-  }
-
-  newGame() {
-    this.button.classList.remove("show")
-    this.button.classList.add("hide")
-    this.gameOver.innerText = ""
-    this.game.restart();
-    this.render();
-  }
-
-  gameOverSequence() {
-    this.gameOver.innerText = `Game Over! Winner is: ${this.game.revealWinner()}`
-    this.button.classList.remove("hide")
-    this.button.classList.add("show")
-  }
-
-  isGameOver() {
-    return this.game.isGameOver()
-  }
-
-  render() {
-    this.viewBoard();
-    if(this.isGameOver()) {
-      this.gameOverSequence()
-    }
-  }
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (View);
 
 
 /***/ })

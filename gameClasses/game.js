@@ -1,4 +1,4 @@
-import Board from './board.js'
+import Board from "./board.js";
 class Game {
   constructor(player1, player2) {
     this.player1 = player1;
@@ -8,7 +8,7 @@ class Game {
   }
 
   restart() {
-    this.board = new Board()
+    this.board = new Board();
   }
 
   switchPlayers() {
@@ -17,7 +17,7 @@ class Game {
   }
 
   recieveMove(move) {
-    if(!this.isGameOver()) {
+    if (!this.isGameOver()) {
       let moveMade = false;
       if (this.board.isValidMove(move)) {
         this.board.placeMark(move, this.currentPlayer.sym);
@@ -27,20 +27,21 @@ class Game {
   }
 
   isGameOver() {
-    return this.board.isGameOver()
+    return this.board.isGameOver();
   }
 
   revealWinner() {
-    if(this.board.winner.toLowerCase() === "tie") {
+    if (this.board.winner.toLowerCase() === "tie") {
       return this.board.winner;
     }
-    return this.board.winner === this.player1.sym ? this.player1.name : this.player2.name;
+    return this.board.winner === this.player1.sym
+      ? this.player1.name
+      : this.player2.name;
   }
 
   revealBoard() {
     return this.board.board;
   }
-
 }
 
 export default Game;

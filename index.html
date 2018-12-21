@@ -2,33 +2,42 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
-    <script src="bundle.js">
-</script>
+    <title>TickyTacky</title>
+    <script src="bundle.js"></script>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     <link rel="stylesheet" href="master.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
     <div class="title">
       Tic Tac Toe
     </div>
+    <div class="title-author">
+      <a class="title-author" href="https://www.coreyladovsky.com">
+        By Corey Ladovsky
+      </a>
+    </div>
+
     <form class="players" >
       <div class="inputs">
-      <label for="player1">
+        <label for="player1">
+          Please Enter Player 1:
+        </label>
+        <input type="text" id="player1" name="" value="">
+      </div>
 
-      Please Enter Player 1:
-    </label>
-    <input type="text" id="player1" name="" value="">
-  </div>
       <br>
-      <div class="inputs">
 
-      <label for="player2">
-      Please Enter Player 2:
-    </label>
-    <input type="text" id="player2" name="" value="">
-  </div>
-    <br>
+      <div class="inputs">
+        <label for="player2">
+          Please Enter Player 2:
+        </label>
+        <input type="text" id="player2" name="" value="">
+      </div>
+
+      <br>
+
       <input type="submit" class="formSubmit" name="submit" value="submit">
       <br>
     </form>
@@ -36,5 +45,18 @@
     <div class="ticTac"></div>
     <div class="gameOver"></div>
     <button class="hide playAgain formSubmit" type="button" name="button">Play Again?</button>
+
+
+    <ul class="link-list">
+      <li>
+        <a class="linked-in-link" href="https://github.com/coreyladovsky/tickyTacky"><i class="fa fa-github" aria-hidden="true"></i></a>
+      </li>
+      <li>
+        <a class="linked-in-link" href="https://www.linkedin.com/in/corey-ladovsky/"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+      </li>
+      <li>
+        <a class="linked-in-link" href="https://angel.co/corey-ladovsky"> <i class="fa fa-angellist" aria-hidden="true"></i></a>
+      </li>
+    </ul>
   </body>
 </html>

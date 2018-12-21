@@ -1,7 +1,7 @@
 class HumanPlayer {
   constructor(name, sym) {
-    this.name = name;
-    this.sym = sym
+    this.name = name.toUpperCase();
+    this.sym = sym;
   }
 }
 
