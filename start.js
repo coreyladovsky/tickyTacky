@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let play = document.querySelector(".ticTac");
   let form = document.querySelector(".players");
   form.addEventListener("change", event => {
-    state[event.target.className] = event.target.value;
+    state[event.target.id] = event.target.value;
   });
 
   form.addEventListener("submit", e => {

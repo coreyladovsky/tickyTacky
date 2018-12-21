@@ -5,22 +5,36 @@
     <title></title>
     <script src="bundle.js">
 </script>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     <link rel="stylesheet" href="master.css">
   </head>
   <body>
+    <div class="title">
+      Tic Tac Toe
+    </div>
     <form class="players" >
+      <div class="inputs">
+      <label for="player1">
+
       Please Enter Player 1:
-      <input type="text" class="player1" name="" value="">
+    </label>
+    <input type="text" id="player1" name="" value="">
+  </div>
       <br>
+      <div class="inputs">
+
+      <label for="player2">
       Please Enter Player 2:
-      <input type="text" class="player2" name="" value="">
+    </label>
+    <input type="text" id="player2" name="" value="">
+  </div>
+    <br>
+      <input type="submit" class="formSubmit" name="submit" value="submit">
       <br>
-      <input type="submit" name="submit" value="submit">
     </form>
-    <div class="ticTac">
-    </div>
-    <div class="gameOver">
-    </div>
-    <button class="hide playAgain" type="button" name="button">Play Again?</button>
+
+    <div class="ticTac"></div>
+    <div class="gameOver"></div>
+    <button class="hide playAgain formSubmit" type="button" name="button">Play Again?</button>
   </body>
 </html>
