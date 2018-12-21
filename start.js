@@ -20,6 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let player1 = new HumanPlayer(state.player1, "X");
     let player2 = new HumanPlayer(state.player2, "O");
     let game = new Game(player1, player2);
-    new View(game, play, startGame);
+    new View(game, play);
   }
 });

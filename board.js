@@ -93,4 +93,4 @@ class Board extends Array {
   }
 }
 
-module.exports = Board;
+export default Board;

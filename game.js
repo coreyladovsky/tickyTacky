@@ -1,5 +1,4 @@
-const Board = require("./board");
-
+import Board from './board.js'
 class Game {
   constructor(player1, player2) {
     this.player1 = player1;
@@ -38,6 +37,10 @@ class Game {
     return this.board.winner === this.player1.sym ? this.player1.name : this.player2.name;
   }
 
+  revealBoard() {
+    return this.board.board;
+  }
+
 }
 
-module.exports = Game;
+export default Game;

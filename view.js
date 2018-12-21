@@ -1,13 +1,12 @@
 
 class View {
-  constructor(game, play, restart) {
+  constructor(game, play) {
     this.play = play;
     this.game = game;
     this.button = document.querySelector(".playAgain");
     this.gameOver = document.querySelector(".gameOver");
     play.addEventListener("click", this.handleClick.bind(this))
     this.button.addEventListener("click", this.newGame.bind(this))
-    this.restart = restart;
     this.render()
   }
 
@@ -19,7 +18,7 @@ class View {
   viewBoard() {
     let html = ""
     let value = 1;
-    this.game.board.board.forEach(row => {
+    this.game.revealBoard().forEach(row => {
       html += "<ul>"
         row.forEach(el => {
           if(Number(el)) {
