@@ -36,6 +36,7 @@ class Board extends Array {
   }
 
   isGameOver() {
+    this.findWinner();
     return !this.winner && this.movesRemaining > 0 ? false : true;
   }
 
