@@ -3,9 +3,6 @@ class HumanPlayer {
     this.name = name;
     this.sym = sym
   }
-  getMove() {
-
-  }
 }
 
 export default HumanPlayer;

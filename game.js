@@ -14,13 +14,21 @@ class Game {
   }
 
   recieveMove(move) {
-    if(!this.board.isGameOver()) {
+    if(!this.isGameOver()) {
       let moveMade = false;
       if (this.board.isValidMove(move)) {
         this.board.placeMark(move, this.currentPlayer.sym);
         this.switchPlayers();
       }
     }
+  }
+
+  isGameOver() {
+    return this.board.isGameOver()
+  }
+
+  revealWinner() {
+    return this.board.winner;
   }
 
 }

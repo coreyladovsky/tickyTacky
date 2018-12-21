@@ -37,6 +37,7 @@ class Board extends Array {
 
   isGameOver() {
     this.findWinner();
+    if(this.movesRemaining === 0) { this.winner = "TIE"}
     return !this.winner && this.movesRemaining > 0 ? false : true;
   }
 
@@ -47,7 +48,7 @@ class Board extends Array {
     return this.winner;
   }
 
-  isHorizontal(board = this.board.length) {
+  isHorizontal(board = this.board) {
     for (let i = 0; i < board.length; i++) {
       if (board[i].every(el => el === board[i][0])) {
         this.winner = board[i][0];

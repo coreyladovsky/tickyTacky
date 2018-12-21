@@ -23,3 +23,11 @@ ul {
 .ticTac:hover {
   cursor: pointer;
 }
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
