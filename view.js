@@ -38,7 +38,8 @@ class View {
     this.button.classList.remove("show")
     this.button.classList.add("hide")
     this.gameOver.innerText = ""
-    this.restart();
+    this.game.restart();
+    this.render();
   }
 
   gameOverSequence() {

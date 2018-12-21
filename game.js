@@ -8,6 +8,10 @@ class Game {
     this.board = new Board();
   }
 
+  restart() {
+    this.board = new Board()
+  }
+
   switchPlayers() {
     this.currentPlayer =
       this.currentPlayer === this.player1 ? this.player2 : this.player1;
