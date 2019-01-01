@@ -37,7 +37,9 @@ class Board extends Array {
 
   isGameOver() {
     this.findWinner();
-    if(this.movesRemaining === 0) { this.winner = "TIE"}
+    if (this.movesRemaining === 0) {
+      this.winner = "TIE";
+    }
     return !this.winner && this.movesRemaining > 0 ? false : true;
   }
 
